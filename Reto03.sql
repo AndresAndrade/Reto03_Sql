@@ -19,7 +19,7 @@ WHERE Clasificacion NOT IN ('Casa Campestre', 'Condominio')
 GROUP BY Ciudad, Clasificacion 
 ORDER BY Ciudad;
 
--- 4 Las dos estan bn
+-- 4 Las dos estan bien
 SELECT p.ID_Proyecto, sum(c.Cantidad * m.Precio_Unidad) VALOR
 FROM Proyecto p 
 JOIN Compra c ON p.ID_Proyecto = c.ID_Proyecto 
@@ -36,7 +36,6 @@ WHERE c.Pagado = 'No'
 GROUP BY p.ID_Proyecto HAVING VALOR > 50000
 ORDER BY VALOR DESC;
 
-
 -- 5 
 SELECT (l.Nombre || ' ' || l.Primer_Apellido || ' ' || l.Segundo_Apellido) LIDER, sum(c.Cantidad * m.Precio_Unidad) VALOR 
 FROM Lider l
@@ -44,15 +43,5 @@ JOIN Proyecto p ON l.ID_Lider = p.ID_Lider
 JOIN Compra c ON p.ID_Proyecto = c.ID_Proyecto
 JOIN MaterialConstruccion m ON c.ID_MaterialConstruccion = m.ID_MaterialConstruccion 
 GROUP BY LIDER
-ORDER BY VALOR DESC
-LIMIT 10;
-
--- Este esta mal
-SELECT l.Nombre || ' ' || l.Primer_Apellido || ' ' || l.Segundo_Apellido LIDER, sum(c.Cantidad * m.Precio_Unidad) VALOR 
-FROM Lider l
-JOIN Proyecto p ON l.ID_Lider = p.ID_Lider
-JOIN Compra c ON p.ID_Proyecto = c.ID_Proyecto
-JOIN MaterialConstruccion m ON c.ID_MaterialConstruccion = m.ID_MaterialConstruccion 
-GROUP BY p.ID_Lider -- Aqui esta la diferencia, se salta un registro no se por que
 ORDER BY VALOR DESC
 LIMIT 10;
